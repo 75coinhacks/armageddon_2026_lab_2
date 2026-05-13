@@ -1,0 +1,40 @@
+#!/bin/bash
+# 1. Update system and install Apache
+yum update -y
+yum install -y httpd
+# 2. Start and enable Apache web server
+systemctl start httpd
+systemctl enable httpd
+# 3. Create the web content
+# We use a 'heredoc' (EOF) to write the HTML and CSS directly to the index file
+cat <<EOF> /var/www/html/index.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Cloud Automation Lab</title>
+</head>
+<body>
+ <header>
+ <h1>Christopher Alonzo</h1>
+ </header>
+ <section>
+ <h2>morph and become</h2>
+ <p>Im doing this to become valuable in the job market. Money is not everything it is the only thing.</p>
+ <https://www.bing.com/images/search?view=detailV2&ccid=5ZlnpG%2BI&id=05B9B6426F68B4226AFBC1A2627690965EB78A76&thid=OIP.5ZlnpG-ITlqbR3rrupYfbAHaFW&mediaurl=https%3A%2F%2Fthumbs.dreamstime.com%2Fz%2Fdollar-bills-stacks-money-table-background-made-hundred-piles-as-colorful-cash-desk-143812575.jpg&cdnurl=https%3A%2F%2Fth.bing.com%2Fth%2Fid%2FR.e59967a46f884e5a9b477aebba961f6c%3Frik%3Ddoq3XpaQdmKiwQ%26pid%3DImgRaw%26r%3D0&exph=1157&expw=1600&q=moneystack&FORM=IRPRST&ck=A80F05A8FC180D3903F73F8DA53036F2&selectedIndex=3&itb=0&cw=1375&ch=659&ajaxhist=0&ajaxserp=0>
+ </section>
+ <section>
+ <h2>Project Armaggedon</h2>
+ <p>Die with dignity.</p>
+ </section>
+ <footer>
+ <h3>Contact / Footer</h3>
+ <p>Email: cloudhack9@gmail.com | AWS Cloud Lab 2026</p>
+ </footer>
+</body>
+</html>
+EOF
+# 4. Set appropriate permissions for the web directory
+chown -R apache:apache /var/www/html
+chmod -R 755 /var/www/html
